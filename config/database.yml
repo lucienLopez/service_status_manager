@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: service_status_manager
+  password: YirEgjDux28lLwTd03PO
+
+development:
+  <<: *default
+  database: service_status_manager_development
+
+test:
+  <<: *default
+  database: service_status_manager_test
+
+production:
+  <<: *default
+  database: service_status_manager_production
