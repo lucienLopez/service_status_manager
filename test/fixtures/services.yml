@@ -1,0 +1,8 @@
+with_xpath:
+  name: with_xpath
+  url: "http://with_xpath.com"
+  xpath: "//span[contains(@class, 'status')"
+  expected_content: "ok"
+no_xpath:
+  name: no_xpath
+  url: "http://no_xpath.com"
