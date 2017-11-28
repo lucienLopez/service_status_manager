@@ -16,9 +16,11 @@ ActiveRecord::Schema.define(version: 20171128193818) do
   enable_extension "plpgsql"
 
   create_table "pings", force: :cascade do |t|
-    t.string "name"
+    t.string "is_up"
+    t.integer "service_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["service_id", "updated_at"], name: "index_pings_on_service_id_and_updated_at"
   end
 
   create_table "services", force: :cascade do |t|
@@ -27,4 +29,5 @@ ActiveRecord::Schema.define(version: 20171128193818) do
     t.boolean "is_up", default: false
   end
 
+  add_foreign_key "pings", "services"
 end
