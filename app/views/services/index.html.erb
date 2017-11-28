@@ -1,0 +1,28 @@
+<table>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Url
+      </th>
+      <th>
+        Status
+      </th>
+    </tr>
+  </thead>
+  <% @services.each do |service| %>
+      <tr>
+        <td>
+          <%= service.name %>
+        </td>
+        <td>
+          <%= service.url %>
+        </td>
+        <td>
+          <%= service.is_up ? 'up' : 'down' %>
+        </td>
+      </tr>
+  <% end %>
+</table>
