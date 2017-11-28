@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171128193818) do
+ActiveRecord::Schema.define(version: 20171128225253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20171128193818) do
     t.string "name"
     t.string "url"
     t.boolean "is_up", default: false
+    t.text "xpath"
+    t.string "expected_content"
   end
 
   add_foreign_key "pings", "services"

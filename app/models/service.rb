@@ -2,10 +2,12 @@
 #
 # Table name: services
 #
-#  id    :integer          not null, primary key
-#  name  :string
-#  url   :string
-#  is_up :boolean          default(FALSE)
+#  id               :integer          not null, primary key
+#  name             :string
+#  url              :string
+#  is_up            :boolean          default(FALSE)
+#  xpath            :text
+#  expected_content :string
 #
 
 class Service < ApplicationRecord
@@ -27,9 +29,13 @@ class Service < ApplicationRecord
   private
 
   def check_status
-    # TODO search inside page for content
+    response = HTTP.get(url)
 
     # We consider the website unavailable unless we receive a success/redirect status code
-    return false unless (200..399).include?(HTTP.get(url).code)
+    return false unless (200..399).include?(response.code)
+    return true unless xpath && expected_content
+
+    doc = Nokogiri::HTML(response.body.to_s)
+    return doc.xpath(xpath).first.try(:content) == expected_content
   end
 end
