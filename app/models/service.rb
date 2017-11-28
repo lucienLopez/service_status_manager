@@ -17,7 +17,11 @@ class Service < ApplicationRecord
   def update_status
     currently_up = check_status
     pings.create(is_up: currently_up)
-    update(is_up: currently_up) if currently_up != is_up
+
+    if currently_up != is_up
+      update(is_up: currently_up)
+      ServiceMailer.send_notification(self).deliver_now
+    end
   end
 
   private
