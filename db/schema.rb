@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20171128193818) do
   enable_extension "plpgsql"
 
   create_table "pings", force: :cascade do |t|
-    t.string "is_up"
+    t.boolean "is_up"
     t.integer "service_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
